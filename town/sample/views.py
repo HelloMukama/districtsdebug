@@ -2,7 +2,7 @@ from rest_framework import viewsets, generics, mixins, throttling
 
 
 from .models import City, TownType, Town, District
-from .serializers import DistrictSerializer
+from .serializers import DistrictSerializer, TownSerializer
 
 
 # class DistrictViewSet(FilteredListModelMixin, viewsets.ReadOnlyModelViewSet):
@@ -25,7 +25,14 @@ class DistrictListViewSet(generics.ListCreateAPIView):
 
     def get_queryset(self, *args, **kwargs):
         qs = super().get_queryset(*args, **kwargs)
-        # user = self.request.user
-        # if not user.is_authenticated:
-        #     return District.objects.none()
+        return qs
+
+
+class TownsListViewSet(generics.ListCreateAPIView):
+    # queryset = Town.objects.filter(is_city=True)
+    queryset = Town.objects.filter(is_city=False)
+    serializer_class = TownSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
         return qs

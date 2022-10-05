@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 
 
@@ -18,7 +19,7 @@ class TownType(models.Model):
 class Town(models.Model):
     name = models.CharField(max_length=200, blank=False, null=False)
     town_type = models.ForeignKey(TownType, on_delete=models.SET_NULL, blank=False, null=True)
-    city = models.CharField(max_length=50, blank=True, null=True)
+    is_city = models.BooleanField(default=False)
     address = models.TextField(blank=True, null=True)
    
     def __str__(self):
