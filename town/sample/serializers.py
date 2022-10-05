@@ -39,4 +39,4 @@ class DistrictSerializer(serializers.ModelSerializer):
         if not isinstance(obj, District):
             return None
         return obj.pk
- 
+   
